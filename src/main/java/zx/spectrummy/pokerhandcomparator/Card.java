@@ -5,12 +5,21 @@ import java.util.Objects;
 import static java.util.Comparator.comparingInt;
 
 public class Card implements Comparable<Card> {
-    Suit suit;
-    int rank;
+
+    private Suit suit;
+    private int rank;
 
     public Card(int rank, Suit suit) {
         this.suit = suit;
         this.rank = rank;
+    }
+
+    public Suit getSuit() {
+        return suit;
+    }
+
+    public int getRank() {
+        return rank;
     }
 
     public static Card fromString(String stringValue) {
@@ -43,10 +52,21 @@ public class Card implements Comparable<Card> {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "suit=" + suit +
-                ", rank=" + rank +
-                '}';
+        char rankAsChar = switch (rank) {
+            case 10 -> 'T';
+            case 11 -> 'J';
+            case 12 -> 'Q';
+            case 13 -> 'K';
+            case 14 -> 'A';
+            default -> Character.forDigit(rank, 10);
+        };
+        char suitAsChar = switch (suit) {
+            case CLUBS -> 'c';
+            case HEARTS -> 'h';
+            case DIAMONDS -> 'd';
+            case SPADES -> 's';
+        };
+        return new StringBuilder().append(rankAsChar).append(suitAsChar).toString();
     }
 
     private static int parseRank(char rank) {
