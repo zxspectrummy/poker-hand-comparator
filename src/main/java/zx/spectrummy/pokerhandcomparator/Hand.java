@@ -23,7 +23,7 @@ public class Hand implements Comparable<Hand> {
     public Hand(List<Card> cards) {
         this.cards = cards;
         this.suits = new HashSet<>();
-        Map<Integer, Integer> rankFrequencyMap = new TreeMap<>();
+        Map<Integer, Integer> rankFrequencyMap = new HashMap<>();
         for (Card card : cards) {
             this.suits.add(card.getSuit());
             rankFrequencyMap.put(card.getRank(), rankFrequencyMap.getOrDefault(card.getRank(), 0) + 1);
@@ -43,25 +43,25 @@ public class Hand implements Comparable<Hand> {
                         .thenComparing(Map.Entry.comparingByKey(Comparator.reverseOrder())))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
                         (e1, e2) -> e1, LinkedHashMap::new));
-        this.rank = calculateRank(this);
+        this.rank = calculateRank();
     }
 
-    private static HandRank calculateRank(Hand hand) {
-        if (hand.isStraightFlush()) {
+    private HandRank calculateRank() {
+        if (this.isStraightFlush()) {
             return HandRank.STRAIGHTFLUSH;
-        } else if (hand.isFourOfKind()) {
+        } else if (this.isFourOfKind()) {
             return HandRank.FOUROFAKIND;
-        } else if (hand.isFullHouse()) {
+        } else if (this.isFullHouse()) {
             return HandRank.FULLHOUSE;
-        } else if (hand.isFlush()) {
+        } else if (this.isFlush()) {
             return HandRank.FLUSH;
-        } else if (hand.isStraight()) {
+        } else if (this.isStraight()) {
             return HandRank.STRAIGHT;
-        } else if (hand.isThreeOfKind()) {
+        } else if (this.isThreeOfKind()) {
             return HandRank.THREEOFAKIND;
-        } else if (hand.isTwoPairs()) {
+        } else if (this.isTwoPairs()) {
             return HandRank.TWOPAIRS;
-        } else if (hand.isOnePair()) {
+        } else if (this.isOnePair()) {
             return HandRank.ONEPAIR;
         }
         return HandRank.HIGHCARD;

@@ -63,6 +63,8 @@ public class HandTest {
 
     @Test
     public void testCompareCardsWithDifferentRanks() {
+        assertThat(Hand.fromString("5h6h7hAhQd"), lessThan(Hand.fromString("2c3s3h8cJd")));
+        assertThat(Hand.fromString("AhAs7h8hQh"), lessThan(Hand.fromString("2c2d5c5dTc")));
         assertThat(Hand.fromString("5h6h7hAhQh"), lessThan(Hand.fromString("AcKcQcJcTc")));
     }
 
