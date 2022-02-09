@@ -56,9 +56,9 @@ public class HandTest {
 
     @Test
     public void testCompareHighCard() {
-        assertEquals(0, Hand.fromString("5s6h7dAdJc").compareTo(Hand.fromString("Jc6h5s7dAd")));
-        assertEquals(1, Hand.fromString("5s6h7dAdJc").compareTo(Hand.fromString("Jc6h5s7dQd")));
-        assertEquals(-1, Hand.fromString("5s6h7dQdTc").compareTo(Hand.fromString("Jc6h5s7dQd")));
+        assertThat(Hand.fromString("5s6h7dAdJc").compareTo(Hand.fromString("Jc6h5s7dAd")), equalTo(0));
+        assertThat(Hand.fromString("5s6h7dAdJc"), greaterThan(Hand.fromString("Jc6h5s7dQd")));
+        assertThat(Hand.fromString("5s6h7dQdTc"), lessThan(Hand.fromString("Jc6h5s7dQd")));
     }
 
     @Test
