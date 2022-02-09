@@ -6,8 +6,8 @@ import static java.util.Comparator.comparingInt;
 
 public class Card implements Comparable<Card> {
 
-    private Suit suit;
-    private int rank;
+    private final Suit suit;
+    private final int rank;
 
     public Card(int rank, Suit suit) {
         this.suit = suit;
@@ -27,14 +27,13 @@ public class Card implements Comparable<Card> {
     }
 
     private static Suit parseSuit(char suit) {
-        var result = switch (suit) {
+        return switch (suit) {
             case 'h', 'H' -> Suit.HEARTS;
             case 'd', 'D' -> Suit.DIAMONDS;
             case 'c', 'C' -> Suit.CLUBS;
             case 's', 'S' -> Suit.SPADES;
             default -> throw new IllegalArgumentException("Cannot parse suit");
         };
-        return result;
     }
 
     @Override
@@ -70,7 +69,7 @@ public class Card implements Comparable<Card> {
     }
 
     private static int parseRank(char rank) {
-        var value = switch (rank) {
+        return switch (rank) {
             case 'A' -> 14;
             case 'K' -> 13;
             case 'Q' -> 12;
@@ -79,7 +78,6 @@ public class Card implements Comparable<Card> {
             case '2', '3', '4', '5', '6', '7', '8', '9' -> Character.getNumericValue(rank);
             default -> throw new IllegalArgumentException("Cannot parse card rank");
         };
-        return value;
     }
 
     @Override
