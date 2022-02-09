@@ -46,6 +46,6 @@ project's [unit tests](https://github.com/zxspectrummy/poker-hand-comparator/blo
 
 ## Known limitations
 
-* a hand like A2345 is not recognized as straight (which is kinda ok since the rules were defined as"the values are
-  ordered as given above, with 2 being the lowest and ace the highest value.")
+* ~~a hand like A2345 is not recognized as straight (which is kinda ok since the rules were defined as"the values are
+  ordered as given above, with 2 being the lowest and ace the highest value")~~ fixed
 * there is no validation if the hand is a valid poker hand

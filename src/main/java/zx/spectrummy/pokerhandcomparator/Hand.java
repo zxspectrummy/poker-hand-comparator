@@ -105,9 +105,20 @@ public class Hand implements Comparable<Hand> {
     }
 
     private boolean isStraight() {
-        int firstKey = this.sortedFrequencyMap.keySet().stream().toList().get(0);
-        int lastKey = this.sortedFrequencyMap.keySet().stream().reduce((prev, next) -> next).orElse(null);
-        return (this.sortedFrequencyMap.size() == 5) && (firstKey - lastKey == 4);
+        if (this.sortedFrequencyMap.size() == 5) {
+            int firstKey = this.sortedFrequencyMap.keySet().stream().toList().get(0);
+            int lastKey = this.sortedFrequencyMap.keySet().stream().reduce((prev, next) -> next).orElse(null);
+            if (firstKey == 14) { // if hand contains an ace
+                int secondKey = this.sortedFrequencyMap.keySet().stream().toList().get(1);
+                if ((secondKey == 5) && (lastKey == 2)) { // and the rest cards are 2-5 then replace the default ace value (14) with (1)
+                    this.sortedFrequencyMap.remove(14);
+                    this.sortedFrequencyMap.put(1, 1);
+                    return true;
+                }
+            }
+            return firstKey - lastKey == 4;
+        }
+        return false;
     }
 
     /**

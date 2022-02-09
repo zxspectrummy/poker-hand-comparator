@@ -40,6 +40,11 @@ public class HandTest {
     }
 
     @Test
+    public void testHandContainsA5Straight() {
+        assertEquals(Hand.fromString("Ac2d3c4h5h").getRank(), HandRank.STRAIGHT);
+    }
+
+    @Test
     public void testHandContainsTwoPairs() {
         assertEquals(Hand.fromString("5s5h6dAdAc").getRank(), HandRank.TWOPAIRS);
     }
@@ -96,5 +101,11 @@ public class HandTest {
     @Test
     public void compareStraights() {
         assertThat(Hand.fromString("2h4s6c5h3c"), lessThan(Hand.fromString("8hTd6s7d9c")));
+        assertThat(Hand.fromString("2h4s6c5h3c"), lessThan(Hand.fromString("AhKdQsJdTc")));
+    }
+
+    @Test
+    public void compareStraightLowestStraightWithAnotherOne() {
+        assertThat(Hand.fromString("2h4s6c5h3c"), greaterThan(Hand.fromString("4h2d3sAd5c")));
     }
 }
