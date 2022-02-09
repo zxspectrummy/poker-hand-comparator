@@ -10,6 +10,15 @@ public class Hand implements Comparable<Hand> {
     private final LinkedHashMap<Integer, Integer> sortedFrequencyMap;
     private final HandRank rank;
 
+    /**
+     * Creates new Hand object from a string representation
+     * where each card is defined as a two symbol string RS where
+     * R - card rank ['2'-'9','A','K','Q','J','T']
+     * S - card suit ['c','d','h','s']
+     *
+     * @param stringValue a string represenation of poker hand
+     * @return Hand object
+     */
     public static Hand fromString(String stringValue) {
         int pos = 0;
         List<Card> cards = new ArrayList<>();
